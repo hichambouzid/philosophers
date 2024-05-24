@@ -1,0 +1,94 @@
+memset:
+
+Description: Fills a block of memory with a specified value.
+Syntax: void *memset(void *s, int c, size_t n);
+Parameters:
+s: Pointer to the block of memory.
+c: Value to be set (converted to an unsigned char).
+n: Number of bytes to be set to the value.
+printf:
+
+Description: Prints formatted output to the standard output (stdout).
+Syntax: int printf(const char *format, ...);
+Parameters:
+format: C string that contains the text to be written and any format specifiers.
+malloc:
+
+Description: Allocates a block of memory of a specified size.
+Syntax: void *malloc(size_t size);
+Parameters:
+size: Number of bytes to allocate.
+free:
+
+Description: Deallocates a block of memory previously allocated by malloc, calloc, or realloc.
+Syntax: void free(void *ptr);
+Parameters:
+ptr: Pointer to the memory block to be deallocated.
+write:
+
+Description: Writes data to a file descriptor.
+Syntax: ssize_t write(int fd, const void *buf, size_t count);
+Parameters:
+fd: File descriptor to write to.
+buf: Buffer containing the data to write.
+count: Number of bytes to write.
+usleep:
+
+Description: Suspends execution of the calling thread for a specified number of microseconds.
+Syntax: int usleep(useconds_t usec);
+Parameters:
+usec: Number of microseconds to sleep.
+gettimeofday:
+
+Description: Gets the current time.
+Syntax: int gettimeofday(struct timeval *tv, struct timezone *tz);
+Parameters:
+tv: Pointer to a timeval structure to receive the current time.
+tz: Pointer to a timezone structure (typically set to NULL).
+pthread_create:
+
+Description: Creates a new thread.
+Syntax: int pthread_create(pthread_t *thread, const pthread_attr_t *attr, void *(*start_routine)(void *), void *arg);
+Parameters:
+thread: Pointer to a pthread_t structure to receive the thread ID.
+attr: Pointer to thread attributes (or NULL for default attributes).
+start_routine: Function to be executed by the thread.
+arg: Argument to pass to the start routine.
+pthread_detach:
+
+Description: Detaches a thread, allowing its resources to be automatically reclaimed upon termination.
+Syntax: int pthread_detach(pthread_t thread);
+Parameters:
+thread: Thread to detach.
+pthread_join:
+
+Description: Waits for a thread to terminate.
+Syntax: int pthread_join(pthread_t thread, void **retval);
+Parameters:
+thread: Thread to wait for.
+retval: Pointer to a location to receive the return value of the thread (or NULL).
+pthread_mutex_init:
+
+Description: Initializes a mutex.
+Syntax: int pthread_mutex_init(pthread_mutex_t *mutex, const pthread_mutexattr_t *attr);
+Parameters:
+mutex: Pointer to the mutex to initialize.
+attr: Pointer to mutex attributes (or NULL for default attributes).
+pthread_mutex_destroy:
+
+Description: Destroys a mutex.
+Syntax: int pthread_mutex_destroy(pthread_mutex_t *mutex);
+Parameters:
+mutex: Pointer to the mutex to destroy.
+pthread_mutex_lock:
+
+Description: Locks a mutex, blocking if the mutex is already locked.
+Syntax: int pthread_mutex_lock(pthread_mutex_t *mutex);
+Parameters:
+mutex: Pointer to the mutex to lock.
+pthread_mutex_unlock:
+
+Description: Unlocks a mutex.
+Syntax: int pthread_mutex_unlock(pthread_mutex_t *mutex);
+Parameters:
+mutex: Pointer to the mutex to unlock.
