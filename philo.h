@@ -6,7 +6,7 @@
 /*   By: hibouzid <hibouzid@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 15:26:13 by hibouzid          #+#    #+#             */
-/*   Updated: 2024/05/31 17:08:02 by hibouzid         ###   ########.fr       */
+/*   Updated: 2024/06/02 21:17:54 by hibouzid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,12 @@
 #include <stdlib.h>
 #include <semaphore.h>
 #include <unistd.h>
+#include <errno.h>
 
 typedef struct philo
 {
 	int n_philo;
-	int start_simutaltion;
+	long start_simutaltion;
 	int t_die;
 	int t_eat;
 	int t_sleep;
@@ -31,6 +32,14 @@ typedef struct philo
 	pthread_t *philo;
 } t_philo;
 
+
+typedef enum UPCODE{
+	INIT,
+	LOCK,
+	UNLOCK,
+	DESTROY
+	
+} t_upcode;
 // typedef struct s_data
 // {
 // 	int id;
@@ -51,5 +60,6 @@ typedef struct elemet{
 int	ft_atoi(char *str);
 int ft_strlen(char *str);
 t_philo *fill_struct(int ac, char **av);
+void ft_putstr(char *str, int fd);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hibouzid <hibouzid@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 17:39:27 by hibouzid          #+#    #+#             */
-/*   Updated: 2024/05/31 14:45:19 by hibouzid         ###   ########.fr       */
+/*   Updated: 2024/06/02 16:57:54 by hibouzid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_philo *ft_parse_args(int ac, t_philo *data)
 		free(data);
 		return (NULL);
 	}
-	if (data->t_sleep < 6e4 || data->t_die < 6e4 || data->t_eat < 6e4)
+	if (data->t_sleep < 60000 || data->t_die < 60000 || data->t_eat < 60000)
 	{
 		free(data);
 		return (NULL);
@@ -82,9 +82,9 @@ t_philo *fill_struct(int ac, char **av)
 	
 	data = malloc(sizeof(t_philo));
 	data->n_philo = ft_atoi(av[1]);	
-	data->t_die = ft_atoi(av[2]) * 1e3;	
-	data->t_eat = ft_atoi(av[3]) * 1e3;	
-	data->t_sleep = ft_atoi(av[4]) * 1e3;
+	data->t_die = ft_atoi(av[2]) * 1000;	
+	data->t_eat = ft_atoi(av[3]) * 1000;	
+	data->t_sleep = ft_atoi(av[4]) * 1000;
 	if (ac == 6)
 		data->n_repeat = ft_atoi(av[5]);
 	return (ft_parse_args(ac, data));
