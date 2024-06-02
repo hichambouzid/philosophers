@@ -1,0 +1,20 @@
+how thread work & what is a thread
+
+
+thread:
+-is an smallest sequence od insrtuctions that
+can be managed independently by s scheduler
+-multipke threads can exist withing one process
+and share it's resources
+-as long as we have singl active thread withing a process , this porcess is alive 
+
+
+tow type of thread:
+ user level thread : its information is not shared with kernel.
+ kernel level thread : this type of thread operated by the operating system and kernel
+
+
+ Multithreading process.
+
+ Reader Writer Problem
+ ow we lock and unlock a specific region of code 
