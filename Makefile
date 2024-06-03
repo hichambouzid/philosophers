@@ -1,9 +1,8 @@
 NAME = philo
 
-CFILES = philo_util_0.c philo.c philo_util_1.c
+CFILES = philo_util_0.c philo.c philo_util_1.c free_data.c
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address
-
+CFLAGS = -Wall -Wextra -Werror 
 OBJS = $(CFILES:.c=.o)
 
 $(NAME):$(OBJS)
