@@ -6,7 +6,7 @@
 /*   By: hibouzid <hibouzid@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 17:20:15 by hibouzid          #+#    #+#             */
-/*   Updated: 2024/06/03 17:50:29 by hibouzid         ###   ########.fr       */
+/*   Updated: 2024/06/04 17:38:46 by hibouzid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static void assigne_data(t_philo *data)
 	while (i < data->n_philo)
 	{
 		da[i].left = &data->forks[i + 1 % data->n_philo];
+		printf("------------>%d\n", (i + 1) % data->n_philo);
 		da[i].right = &data->forks[i];
 		da[i].thread = &data->philo[i];
 		i++;

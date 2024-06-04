@@ -6,7 +6,7 @@
 /*   By: hibouzid <hibouzid@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 15:26:13 by hibouzid          #+#    #+#             */
-/*   Updated: 2024/06/03 18:40:59 by hibouzid         ###   ########.fr       */
+/*   Updated: 2024/06/04 12:57:00 by hibouzid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_data
 {
 	int id;
 	long start_time;
+	long end_time;
 	pthread_t *thread;
 	pthread_mutex_t *left;
 	pthread_mutex_t *right;

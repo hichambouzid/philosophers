@@ -1,41 +1,100 @@
 
 #include "philo.h"
 
+
 void *eat(void *data)
 {
 	t_philo *philo;
+	t_data *infos;
 
-	philo = (t_data *)data;
-	safe_mutex_handle(philo->thread_mutex[philo->index].left, LOCK);
-	
-	safe_mutex_handle(philo->thread_mutex[philo->index].left, UNLOCK);
-	retunr (NULL);
+	philo = (t_philo *)data;
+	infos = philo->thread_mutex;
+	if (!philo->thread_mutex[philo->index].right)
+		{
+			printf("errooooor\n");
+			return (0);
+		}
+	if (safe_mutex_handle(philo->thread_mutex[philo->index].left, LOCK) || 
+		safe_mutex_handle(philo->thread_mutex[philo->index].right, LOCK))
+		{
+			ft_free(philo, philo->n_philo);
+			return (NULL);
+		}
+	printf("=========\n");
+	infos[philo->index].start_time = get_current_time();
+	printf("%ld %d has taken a fork\n", (infos[philo->index].start_time - philo->start_simutaltion) / 1000, philo->index + 1);
+	printf("%ld %d has taken a fork\n", (infos[philo->index].start_time - philo->start_simutaltion) / 1000, philo->index + 1);
+	printf("%ld %d is eating\n", (get_current_time() - philo->start_simutaltion) / 1000, philo->index + 1);
+	usleep(philo->t_eat);
+	printf("%ld %d is sleeping\n", (get_current_time() - philo->start_simutaltion) / 1000, philo->index + 1);
+	usleep(philo->t_sleep);
+	infos[philo->index].end_time = get_current_time();
+	safe_mutex_handle(philo->thread_mutex[philo->index].left, UNLOCK); 
+	safe_mutex_handle(philo->thread_mutex[philo->index].right, UNLOCK);
+	return (NULL);
 }
 
-// static void lock_unloc(t_data *philo, int i)
-// {
-	
-// }
+
+
+static int check_if_die(t_philo *data)
+{
+	if (data->thread_mutex[data->index].end_time - data->thread_mutex[data->index].start_time > data->t_die)
+		return (1);
+	return (0);
+	// if (((end / 1000) - (start / 1000)) > time_die / 1000)
+	// 	return (1);
+	// return (0);
+}
 
 int start_eating(t_philo *data)
 {
 	int i;
-
+	int j;
+	void *m;
 	i = 0;
-	while (i <= data->n_repeat)
+	j = 0;
+	while (j <= data->n_repeat)
 	{
 		if (data->n_repeat == 0)
 		{
 			while (1)
 			{
-				if (i == data->n_repeat)
+				if (i == data->n_philo)
 					i = 0;
 				data->index = i;
-				pthread_create(data->thread_mutex[i].thread, NULL, eat, &data);
-
+				pthread_create(&data->philo[i], NULL, eat, &data);
+				// printf("=========\n");
+				pthread_join(data->thread_mutex[i].thread[i], &m);
+				if (check_if_die(data))
+				{
+					printf("%ld %d die\n", (get_current_time() - data->start_simutaltion) / 1000,
+						data->index + 1);
+					ft_free(data, data->n_philo);
+				}
+				i++;
 			}
+			return (0);
 		}
+		else
+		{
+			if (i == data->n_repeat)
+			{
+					j++;
+					i = 0;
+			}
+			data->index = i;
+			pthread_create(data->thread_mutex[i].thread, NULL, eat, &data);
+			if (check_if_die(data))
+			{
+				printf("%ld %d die\n", (get_current_time() - data->start_simutaltion) / 1000,
+					data->index + 1);
+				ft_free(data, data->n_philo);
+			}
+			i++;
+		}
+
 	}
+	return (0);
 }
 
 int main(int ac, char **av)
@@ -53,6 +112,7 @@ int main(int ac, char **av)
 		if (init_data(data))
 			return (printf("error\n"));
 		data->start_simutaltion = get_current_time();
+		start_eating(data);
 	}
 	else
 		return (printf("number of argument is invalide"));

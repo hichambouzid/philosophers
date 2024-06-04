@@ -6,7 +6,7 @@ CFLAGS = -Wall -Wextra -Werror
 OBJS = $(CFILES:.c=.o)
 
 $(NAME):$(OBJS)
-	cc $(CFLAGS) $^ -o $@
+	cc $(CFLAGS)  -fsanitize=address $^ -o $@
 
 all: $(NAME)
 
