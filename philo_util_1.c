@@ -6,7 +6,7 @@
 /*   By: hibouzid <hibouzid@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 17:20:15 by hibouzid          #+#    #+#             */
-/*   Updated: 2024/06/04 17:38:46 by hibouzid         ###   ########.fr       */
+/*   Updated: 2024/06/04 19:29:24 by hibouzid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,11 @@ static void assigne_data(t_philo *data)
 	da = data->thread_mutex;
 	while (i < data->n_philo)
 	{
-		da[i].left = &data->forks[i + 1 % data->n_philo];
-		printf("------------>%d\n", (i + 1) % data->n_philo);
+		da[i].left = &data->forks[(i + 1 )% data->n_philo];
+		printf("------------>%d and %d\n", (i + 1) % data->n_philo, i);
 		da[i].right = &data->forks[i];
+		// if (!da[i].right || !da[i].left)
+		// 	printf("l3sha\n");
 		da[i].thread = &data->philo[i];
 		i++;
 	}
