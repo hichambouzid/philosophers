@@ -6,11 +6,16 @@
 /*   By: hibouzid <hibouzid@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 19:53:01 by hibouzid          #+#    #+#             */
-/*   Updated: 2024/06/07 03:47:08 by hibouzid         ###   ########.fr       */
+/*   Updated: 2024/06/07 16:54:06 by hibouzid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void ft_sleep(long d)
+{
+	usleep(d);
+}
 
 void *eat(void *data)
 {
@@ -21,20 +26,27 @@ void *eat(void *data)
 	{
 		if (d && d->access->flag != -1)
 			return (NULL);
-		if (safe_mutex_handle(d->right, LOCK) ||
-			safe_mutex_handle(d->left, LOCK))
+			if (!d->start_time)
+				d->start_time = get_current_time();
+		if (d->start_time && get_current_time() - d->start_time >= d->access->t_die)
+		{
+			printf("-----------------> last time eat %ld \n",( get_current_time() - d->start_time) / 1000);
+			printf("-----------------> time to die %d\n", d->access->t_die / 1000);
+			d->access->flag = d->id ;
+			
+		}
+		if (safe_mutex_handle(d->left, LOCK) ||
+			safe_mutex_handle(d->right, LOCK))
 			break ;
-		if (d->start_time && get_current_time() - d->start_time > d->access->t_die)
-			d->access->flag = d->id;
+		printf("%ld %d has taken a fork\n", (get_current_time() - d->access->start_simutaltion) / 1000, d->id);
+		printf("%ld %d has taken a fork\n", (get_current_time() - d->access->start_simutaltion) / 1000, d->id);
 		d->start_time = get_current_time();
-		printf("%ld %d has taken a fork\n", (d->start_time - d->access->start_simutaltion) / 1000, d->id);
-		printf("%ld %d has taken a fork\n", (d->start_time - d->access->start_simutaltion) / 1000, d->id);
 		printf("%ld %d is eating\n", (d->start_time - d->access->start_simutaltion) / 1000, d->id);
 		usleep(d->access->t_eat);
-		if (safe_mutex_handle(d->right, UNLOCK) || safe_mutex_handle(d->left, UNLOCK))
+		if (safe_mutex_handle(d->left, UNLOCK) || safe_mutex_handle(d->right, UNLOCK))
 			break ;
 		printf("%ld %d is sleeping\n", (get_current_time() - d->access->start_simutaltion) / 1000, d->id);
-		usleep(d->access->t_sleep);
+		ft_sleep(d->access->t_sleep);
 	}
 	return (NULL);
 }
@@ -77,7 +89,7 @@ void start_eating(t_philo *data)
 	{
 		data->start_simutaltion = get_current_time();
 		even(data);
-		usleep(200);
+		// usleep(200);
 		odd(data);
 		while (1)
 		{
