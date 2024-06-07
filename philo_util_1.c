@@ -6,7 +6,7 @@
 /*   By: hibouzid <hibouzid@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 17:20:15 by hibouzid          #+#    #+#             */
-/*   Updated: 2024/06/04 19:29:24 by hibouzid         ###   ########.fr       */
+/*   Updated: 2024/06/07 01:22:24 by hibouzid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,18 @@ static void assigne_data(t_philo *data)
 
 	i = 0;
 	da = data->thread_mutex;
+	data->flag = -1;
 	while (i < data->n_philo)
 	{
 		da[i].left = &data->forks[(i + 1 )% data->n_philo];
-		printf("------------>%d and %d\n", (i + 1) % data->n_philo, i);
+		da[i].end_time= 0;
+		da[i].start_time = 0;
+		da[i].count = 0;
+		// printf("------------>%d and %d\n", (i + 1) % data->n_philo, i);
 		da[i].right = &data->forks[i];
 		// if (!da[i].right || !da[i].left)
 		// 	printf("l3sha\n");
+		da[i].access = data;
 		da[i].thread = &data->philo[i];
 		i++;
 	}
@@ -61,17 +66,19 @@ int init_data(t_philo *data)
 	int i;
 
 	i = 0;
+	if (!data)
+		return (-1);
 	data->philo = malloc(sizeof(pthread_t) * data->n_philo);
 	data->forks = malloc(sizeof(pthread_mutex_t) * (data->n_philo));
 	data->thread_mutex = malloc(sizeof(t_data) * (data->n_philo));
 	while (i < data->n_philo)
 	{
-		if (safe_mutex_handle(&data->forks[i], INIT) == -1)	
+	if (safe_mutex_handle(&data->forks[i], INIT) == -1)	
 			{
 				// printf("im hslvnslere\n");
 				ft_free(data, i);
 				return (-1);
-			}
+			}	
 			data->thread_mutex[i].id = i + 1;
 			// data->thread_mutex[i].thread = data->philo[i];
 		i++;
