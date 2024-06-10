@@ -1,14 +1,14 @@
 #include "philo.h"
-#include<stdio.h>
-#include<sys/time.h>
+#include <stdio.h>
+#include <sys/time.h>
 
-int main()
+int	main(void)
 {
 	struct timeval time;
 
 	if (gettimeofday(&time, NULL))
-		return 0;
-		// sleep(10);
+		return (0);
+	// sleep(10);
 	printf("time in second since 1970 %ld\n", time.tv_sec * 1000);
 	printf("time in mecro mili %d\n", time.tv_usec / 1000);
 	int i = 0;
@@ -21,7 +21,7 @@ int main()
 	// }
 	usleep(200000);
 	if (gettimeofday(&time, NULL))
-	return (0);
+		return (0);
 	long total1 = (time.tv_sec * 1000) + (time.tv_usec / 1000);
 	printf("------>time to sleep %ld\n", total1 - total);
 }

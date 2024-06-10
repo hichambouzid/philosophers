@@ -12,19 +12,19 @@
 
 #include "philo.h"
 
-int ft_strlen(char *str)
+int	ft_strlen(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
 		i++;
 	return (i);
 }
-int ft_help(char *str)
+int	ft_help(char *str)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
@@ -32,29 +32,30 @@ int ft_help(char *str)
 	if (str[i] == '-' || str[i] == '+')
 		i++;
 	j = i;
-	while (str[j] >=  '0' && str[j] <= '9')
+	while (str[j] >= '0' && str[j] <= '9')
 		j++;
 	if (j == i || ft_strlen(str) != j || j - i > 10)
 		return (-1);
 	return (0);
 }
 
-int ft_parse_data(int ac, char **av)
+int	ft_parse_data(int ac, char **av)
 {
-	int i;
-	
+	int	i;
+
 	i = 1;
 	while (i < ac)
 	{
 		if (ft_help(av[i]))
 			return (-1);
-		i++; 
+		i++;
 	}
 	return (0);
 }
-t_philo *ft_parse_args(int ac, t_philo *data)
+t_philo	*ft_parse_args(int ac, t_philo *data)
 {
-	if (data->n_philo <= 0 || data->t_die <= 0 || data->t_eat <= 0 || data->t_sleep <= 0)
+	if (data->n_philo <= 0 || data->t_die <= 0 || data->t_eat <= 0
+		|| data->t_sleep <= 0)
 	{
 		free(data);
 		return (NULL);
@@ -75,17 +76,16 @@ t_philo *ft_parse_args(int ac, t_philo *data)
 	return (data);
 }
 
-t_philo *fill_struct(int ac, char **av)
+t_philo	*fill_struct(int ac, char **av)
 {
-	t_philo *data;
+	t_philo	*data;
 
 	if (ac < 5 || ac > 6 || ft_parse_data(ac, av))
 		return (NULL);
-	
 	data = malloc(sizeof(t_philo));
-	data->n_philo = ft_atoi(av[1]);	
-	data->t_die = ft_atoi(av[2]) * 1000;	
-	data->t_eat = ft_atoi(av[3]) * 1000;	
+	data->n_philo = ft_atoi(av[1]);
+	data->t_die = ft_atoi(av[2]) * 1000;
+	data->t_eat = ft_atoi(av[3]) * 1000;
 	data->t_sleep = ft_atoi(av[4]) * 1000;
 	if (ac == 6)
 		data->n_repeat = ft_atoi(av[5]);
@@ -94,7 +94,7 @@ t_philo *fill_struct(int ac, char **av)
 
 int	ft_atoi(char *str)
 {
-	t_el	ctl;
+	t_el ctl;
 
 	ctl.i = 0;
 	ctl.num = 0;
