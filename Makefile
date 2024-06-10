@@ -8,7 +8,7 @@ OBJS = $(CFILES:.c=.o)
 
 #-fsanitize=address 
 $(NAME):$(OBJS)
-	cc $(CFLAGS) -fsanitize=address $^ -o $@
+	cc $(CFLAGS) -fsanitize=thread $^ -o $@
 
 all: $(NAME)
 

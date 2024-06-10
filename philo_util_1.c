@@ -56,7 +56,6 @@ static void	assigne_data(t_philo *data)
 			da[i].left = &data->forks[(i + 1)];
 			da[i].right = &data->forks[i];
 		}
-
 		da[i].end_time = 0;
 		da[i].start_time = 0;
 		da[i].count = 0;
