@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_util_0.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hibouzid <hibouzid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hibouzid <hibouzid@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 17:39:27 by hibouzid          #+#    #+#             */
-/*   Updated: 2024/06/11 00:10:10 by hibouzid         ###   ########.fr       */
+/*   Updated: 2024/06/11 16:13:03 by hibouzid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	ft_strlen(char *str)
 		i++;
 	return (i);
 }
+
 int	ft_help(char *str)
 {
 	int	i;
@@ -52,6 +53,7 @@ int	ft_parse_data(int ac, char **av)
 	}
 	return (0);
 }
+
 t_philo	*ft_parse_args(int ac, t_philo *data)
 {
 	if (data->n_philo <= 0 || data->t_die <= 0 || data->t_eat <= 0
@@ -72,7 +74,6 @@ t_philo	*ft_parse_args(int ac, t_philo *data)
 	}
 	if (ac < 6)
 		data->n_repeat = 0;
-	// printf("---->%d\n", data->n_repeat);
 	return (data);
 }
 
@@ -82,7 +83,7 @@ t_philo	*fill_struct(int ac, char **av)
 
 	if (ac < 5 || ac > 6 || ft_parse_data(ac, av))
 		return (NULL);
-	data = malloc(sizeof(t_philo ));
+	data = malloc(sizeof(t_philo));
 	data->n_philo = ft_atoi(av[1]);
 	data->t_die = ft_atoi(av[2]) * 1000;
 	data->t_eat = ft_atoi(av[3]) * 1000;
@@ -90,32 +91,4 @@ t_philo	*fill_struct(int ac, char **av)
 	if (ac == 6)
 		data->n_repeat = ft_atoi(av[5]);
 	return (ft_parse_args(ac, data));
-}
-
-int	ft_atoi(char *str)
-{
-	t_el ctl;
-
-	ctl.i = 0;
-	ctl.num = 0;
-	ctl.sign = 1;
-	if (str[ctl.i] == '+')
-		ctl.i++;
-	else if (str[ctl.i] == '-')
-	{
-		ctl.i++;
-		ctl.sign = -1;
-	}
-	while ((str[ctl.i] >= 9 && str[ctl.i] <= 13) || str[ctl.i] == 32)
-		ctl.i++;
-	while (str[ctl.i] && (str[ctl.i] >= '0' && str[ctl.i] <= '9'))
-	{
-		ctl.num = (ctl.num * 10) + str[ctl.i] - 48;
-		ctl.i++;
-	}
-	if (ctl.num < INT_MIN || ctl.num > INT_MAX)
-		return (-1);
-	if (ctl.sign == -1)
-		ctl.num *= -1;
-	return ((int)ctl.num);
 }

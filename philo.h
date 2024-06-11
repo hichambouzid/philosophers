@@ -6,7 +6,7 @@
 /*   By: hibouzid <hibouzid@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 15:26:13 by hibouzid          #+#    #+#             */
-/*   Updated: 2024/06/10 03:48:29 by hibouzid         ###   ########.fr       */
+/*   Updated: 2024/06/11 16:20:37 by hibouzid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ typedef struct s_data
 {
 	int					id;
 	long				start_time;
-	long				end_time;
 	int					count;
 	int					flag;
 	pthread_t			*thread;
@@ -84,5 +83,7 @@ int						init_data(t_philo *data);
 long					get_current_time(void);
 void					ft_check_die(t_data *philo);
 int						should_stop(t_data *philo, int n, int n_meals);
+void					odd(t_philo *data);
+void					even(t_philo *data);
 
 #endif

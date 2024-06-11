@@ -10,7 +10,7 @@ OBJS = $(CFILES:.c=.o)
 #gcc *.c -fsanitize=address -ggdb3
 
 $(NAME):$(OBJS)
-	cc $(CFLAGS)  -pthread $^ -o $@
+	cc $(CFLAGS) -fsanitize=address -ggdb3 -pthread $^ -o $@
 
 all: $(NAME)
 

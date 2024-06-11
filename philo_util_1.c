@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_util_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hibouzid <hibouzid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hibouzid <hibouzid@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 17:20:15 by hibouzid          #+#    #+#             */
-/*   Updated: 2024/06/11 01:50:03 by hibouzid         ###   ########.fr       */
+/*   Updated: 2024/06/11 16:20:08 by hibouzid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,20 +46,16 @@ static void	assigne_data(t_philo *data)
 	data->flag = -1;
 	while (i < data->n_philo)
 	{
-
-		if(i == data->n_philo -1)
+		if (i == data->n_philo - 1)
 		{
-		printf("left %d right %d\n", i, (i + 1) % data->n_philo);
-		da[i].left = &data->forks[i];
-		da[i].right = &data->forks[(i + 1) % data->n_philo];		
-		} 
+			da[i].left = &data->forks[i];
+			da[i].right = &data->forks[(i + 1) % data->n_philo];
+		}
 		else
 		{
-		printf("left %d right %d\n", (i + 1) % data->n_philo, i);
-		da[i].right = &data->forks[i];
-		da[i].left = &data->forks[(i + 1) % data->n_philo];
+			da[i].right = &data->forks[i];
+			da[i].left = &data->forks[(i + 1) % data->n_philo];
 		}
-		da[i].end_time = 0;
 		da[i].start_time = 0;
 		da[i].count = 0;
 		da[i].access = data;
@@ -85,12 +81,10 @@ int	init_data(t_philo *data)
 	{
 		if (safe_mutex_handle(&data->forks[i], INIT) == -1)
 		{
-			// printf("im hslvnslere\n");
 			ft_free(data, i);
 			return (-1);
 		}
 		data->thread_mutex[i].id = i + 1;
-		// data->thread_mutex[i].thread = data->philo[i];
 		i++;
 	}
 	assigne_data(data);
@@ -99,8 +93,8 @@ int	init_data(t_philo *data)
 
 long	get_current_time(void)
 {
-	struct timeval time;
-	long nbr;
+	struct timeval	time;
+	long			nbr;
 
 	if (gettimeofday(&time, NULL))
 	{

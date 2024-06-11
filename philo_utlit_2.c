@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_utlit_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hibouzid <hibouzid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hibouzid <hibouzid@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 23:31:52 by hibouzid          #+#    #+#             */
-/*   Updated: 2024/06/11 02:12:22 by hibouzid         ###   ########.fr       */
+/*   Updated: 2024/06/11 16:16:26 by hibouzid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,26 @@
 
 void	ft_check_die(t_data *philo)
 {
-	if (philo->start_time == 0 &&
-		get_current_time()
-			- philo->access->start_simutaltion >= philo->access->t_die && philo->access->t_die > 0)
+	int	i;
+
+	i = 0;
+	while (i < philo->access->n_philo)
 	{
-		printf("------ %ld ------\n", (get_current_time() - philo->access->start_simutaltion));
-		printf("   %d \n", philo->access->t_die);
-		philo->access->flag = philo->id;
-	}
-	else if (philo->start_time && get_current_time()
-			- philo->start_time >= philo->access->t_die)
-	{
-		// printf("==================\n");
-		philo->access->flag = philo->id;
+		if (philo[i].start_time == 0 && get_current_time()
+			- philo[i].access->start_simutaltion >= philo[i].access->t_die
+			&& philo[i].access->t_die > 0)
+			philo[i].access->flag = philo[i].id;
+		else if (philo[i].start_time && get_current_time()
+			- philo[i].start_time >= philo[i].access->t_die)
+			philo[i].access->flag = philo[i].id;
+		i++;
 	}
 }
 
 int	should_stop(t_data *philo, int n, int n_meals)
 {
-	int i;
-	int j;
+	int		i;
+	int		j;
 
 	i = 0;
 	j = 0;
@@ -43,8 +43,38 @@ int	should_stop(t_data *philo, int n, int n_meals)
 			j++;
 		i++;
 	}
-	// printf("---------+%d++-----\n", j);
 	if (j == n)
 		return (0);
 	return (1);
+}
+
+void	even(t_philo *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->n_philo)
+	{
+		if (i % 2 == 0)
+		{
+			pthread_create(&data->philo[i], NULL, eat, &data->thread_mutex[i]);
+			usleep(100);
+		}
+		i++;
+	}
+	return ;
+}
+
+void	odd(t_philo *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->n_philo)
+	{
+		if (i % 2 != 0)
+			pthread_create(&data->philo[i], NULL, eat, &data->thread_mutex[i]);
+		i++;
+	}
+	return ;
 }
