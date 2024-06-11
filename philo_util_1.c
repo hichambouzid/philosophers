@@ -6,7 +6,7 @@
 /*   By: hibouzid <hibouzid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 17:20:15 by hibouzid          #+#    #+#             */
-/*   Updated: 2024/06/10 23:57:51 by hibouzid         ###   ########.fr       */
+/*   Updated: 2024/06/11 01:50:03 by hibouzid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ static void	assigne_data(t_philo *data)
 	i = 0;
 	da = data->thread_mutex;
 	data->flag = -1;
-	// printf("===========%d\n", data->n_philo);
 	while (i < data->n_philo)
 	{
 

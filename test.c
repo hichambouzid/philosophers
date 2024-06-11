@@ -12,16 +12,16 @@ void	*ft_printf(void *args)
 	return (NULL);
 }
 
-int	main(void)
-{
-	pthread_t thread1, thread2;
-	int num1 = 100000, num2 = 2000000;
+// int	main(void)
+// {
+// 	pthread_t thread1, thread2;
+// 	int num1 = 100000, num2 = 2000000;
 
-	pthread_create(&thread1, NULL, ft_printf, &num1);
-	pthread_create(&thread2, NULL, ft_printf, &num2);
+// 	pthread_create(&thread1, NULL, ft_printf, &num1);
+// 	pthread_create(&thread2, NULL, ft_printf, &num2);
 
-	pthread_join(thread1, NULL);
-	pthread_join(thread2, NULL);
+// 	pthread_join(thread1, NULL);
+// 	pthread_join(thread2, NULL);
 
-	printf("the main thread is finished\n");
-}
+// 	printf("the main thread is finished\n");
+// }
