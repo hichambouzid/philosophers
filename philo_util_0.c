@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_util_0.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hibouzid <hibouzid@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hibouzid <hibouzid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 17:39:27 by hibouzid          #+#    #+#             */
-/*   Updated: 2024/06/05 15:29:51 by hibouzid         ###   ########.fr       */
+/*   Updated: 2024/06/11 00:10:10 by hibouzid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ t_philo	*fill_struct(int ac, char **av)
 
 	if (ac < 5 || ac > 6 || ft_parse_data(ac, av))
 		return (NULL);
-	data = malloc(sizeof(t_philo));
+	data = malloc(sizeof(t_philo ));
 	data->n_philo = ft_atoi(av[1]);
 	data->t_die = ft_atoi(av[2]) * 1000;
 	data->t_eat = ft_atoi(av[3]) * 1000;

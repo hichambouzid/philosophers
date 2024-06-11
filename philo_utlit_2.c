@@ -6,7 +6,7 @@
 /*   By: hibouzid <hibouzid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 23:31:52 by hibouzid          #+#    #+#             */
-/*   Updated: 2024/06/10 01:02:07 by hibouzid         ###   ########.fr       */
+/*   Updated: 2024/06/11 00:05:47 by hibouzid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,16 @@ void	ft_check_die(t_data *philo)
 {
 	if (philo->start_time == 0 &&
 		get_current_time()
-			- philo->access->start_simutaltion >= philo->access->t_die)
+			- philo->access->start_simutaltion >= philo->access->t_die && philo->access->t_die > 0)
 	{
+		printf("------ %ld ------\n", (get_current_time() - philo->access->start_simutaltion));
+		printf("   %d \n", philo->access->t_die);
 		philo->access->flag = philo->id;
 	}
 	else if (philo->start_time && get_current_time()
 			- philo->start_time >= philo->access->t_die)
 	{
+		// printf("==================\n");
 		philo->access->flag = philo->id;
 	}
 }

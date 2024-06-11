@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_util_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hibouzid <hibouzid@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hibouzid <hibouzid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 17:20:15 by hibouzid          #+#    #+#             */
-/*   Updated: 2024/06/07 01:22:24 by hibouzid         ###   ########.fr       */
+/*   Updated: 2024/06/10 23:57:51 by hibouzid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,24 +44,25 @@ static void	assigne_data(t_philo *data)
 	i = 0;
 	da = data->thread_mutex;
 	data->flag = -1;
+	// printf("===========%d\n", data->n_philo);
 	while (i < data->n_philo)
 	{
-		if (data->n_philo % 2 == 0)
+
+		if(i == data->n_philo -1)
 		{
-			da[i].left = &data->forks[(i + 1) % data->n_philo];
-			da[i].right = &data->forks[i];
-		}
-		if (data->n_philo % 2)
+		printf("left %d right %d\n", i, (i + 1) % data->n_philo);
+		da[i].left = &data->forks[i];
+		da[i].right = &data->forks[(i + 1) % data->n_philo];		
+		} 
+		else
 		{
-			da[i].left = &data->forks[(i + 1)];
-			da[i].right = &data->forks[i];
+		printf("left %d right %d\n", (i + 1) % data->n_philo, i);
+		da[i].right = &data->forks[i];
+		da[i].left = &data->forks[(i + 1) % data->n_philo];
 		}
 		da[i].end_time = 0;
 		da[i].start_time = 0;
 		da[i].count = 0;
-		// printf("------------>%d and %d\n", (i + 1) % data->n_philo, i);
-		// if (!da[i].right || !da[i].left)
-		// 	printf("l3sha\n");
 		da[i].access = data;
 		da[i].thread = &data->philo[i];
 		i++;
@@ -79,7 +80,8 @@ int	init_data(t_philo *data)
 	data->philo = malloc(sizeof(pthread_t) * data->n_philo);
 	data->forks = malloc(sizeof(pthread_mutex_t) * (data->n_philo));
 	data->thread_mutex = malloc(sizeof(t_data) * (data->n_philo));
-	data->print = malloc(sizeof(t_data));
+	data->print = malloc(sizeof(pthread_mutex_t));
+	safe_mutex_handle(data->print, INIT);
 	while (i < data->n_philo)
 	{
 		if (safe_mutex_handle(&data->forks[i], INIT) == -1)

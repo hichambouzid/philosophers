@@ -6,7 +6,7 @@
 /*   By: hibouzid <hibouzid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 11:33:11 by hibouzid          #+#    #+#             */
-/*   Updated: 2024/06/10 00:26:50 by hibouzid         ###   ########.fr       */
+/*   Updated: 2024/06/10 18:12:55 by hibouzid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	ft_free(t_philo *data, int index)
 	{
 		while (i >= 0)
 		{
+			// safe_mutex_handle(&data->forks[i], UNLOCK);
 			safe_mutex_handle(&data->forks[i], DESTROY);
 			i--;
 		}
